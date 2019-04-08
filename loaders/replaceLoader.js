@@ -2,5 +2,6 @@ const LoaderUtils = require('loader-utils')
 
 module.exports = function (source) {
     const options = LoaderUtils.getOptions(this)
-    return source.replace('dingding',options.name)
+    const result =  source.replace('dingding',options.name)
+    this.callback(null,result)
 }
