@@ -1,4 +1,6 @@
+const LoaderUtils = require('loader-utils')
+
 module.exports = function (source) {
-    console.log(this.query)
-    return source.replace('dingding',this.query.name)
+    const options = LoaderUtils.getOptions(this)
+    return source.replace('dingding',options.name)
 }
