@@ -8,7 +8,12 @@ module.exports = {
     module: {
         rules: [{
             test: /\.js/,
-            use: [path.resolve(__dirname,'./loaders/replaceLoader.js')]
+            use: [{
+                loader: path.resolve(__dirname,'./loaders/replaceLoader.js'),
+                options: {
+                    name: 'liuliu'
+                }
+            }]
         }]
     },
     output: {

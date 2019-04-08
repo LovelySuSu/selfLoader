@@ -1,3 +1,4 @@
 module.exports = function (source) {
-    return source.replace('dingding','susu')
+    console.log(this.query)
+    return source.replace('dingding',this.query.name)
 }
