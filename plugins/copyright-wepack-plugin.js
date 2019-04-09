@@ -6,8 +6,14 @@ class CopyrightWebpackPlugin {
     apply(compiler) {
         compiler.hooks.emit.tapAsync('CopyrightWebpackPlugin',(compilation,cb) => {
             //compilation 本次打包的内容
-            console.log('打包完成')
-            console.log(compilation.assets)
+           compilation.assets['copyright.txt'] = {
+               source: function () {
+                   return 'copyright by ding ding'
+               },
+               size: function () {
+                   return 22
+               }
+           }
             cb()
         })
     }
