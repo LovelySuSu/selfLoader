@@ -1,26 +1,13 @@
 const path = require('path')
-
+const CopyRightWebpackPlugin = require('./plugins/copyright-wepack-plugin')
 module.exports = {
     mode: 'development',
     entry: {
         main: './src/index.js'
     },
-    resolveLoader: {
-        modules: ['node_modules','./loaders']
-    },
-    module: {
-        rules: [{
-            test: /\.js/,
-            use: [{
-                loader: 'replaceLoader.js',
-            }, {
-                loader: 'replaceLoaderAsync.js',
-                options: {
-                    name: 'dingsusu'
-                }
-            }]
-        }]
-    },
+    plugins: [
+        new CopyRightWebpackPlugin()
+    ],
     output: {
         path: path.resolve(__dirname,'dist'),
         filename: '[name].js'
