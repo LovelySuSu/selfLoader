@@ -6,7 +6,9 @@ module.exports = {
         main: './src/index.js'
     },
     plugins: [
-        new CopyRightWebpackPlugin()
+        new CopyRightWebpackPlugin({
+            name: 'dingding'
+        })
     ],
     output: {
         path: path.resolve(__dirname,'dist'),

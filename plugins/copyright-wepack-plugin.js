@@ -1,6 +1,6 @@
 class CoprrightWebpackPlugin {
-    constructor() {
-
+    constructor(options) {
+        console.log(options)
     }
     apply(compiler) {
 
