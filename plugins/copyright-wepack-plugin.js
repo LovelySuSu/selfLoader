@@ -4,6 +4,9 @@ class CopyrightWebpackPlugin {
     }
     // compiler是webpack的实例
     apply(compiler) {
+        compiler.hooks.compile.tap('CopyrightWebpackPlugin',() => {
+                console.log('compiler')
+        })
         compiler.hooks.emit.tapAsync('CopyrightWebpackPlugin',(compilation,cb) => {
             //compilation 本次打包的内容
            compilation.assets['copyright.txt'] = {
