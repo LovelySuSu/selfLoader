@@ -1,0 +1,23 @@
+{
+  "name": "makeloader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bundler.js",
+  "dependencies": {
+    "@babel/parser": "^7.4.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LovelySuSu/selfLoader.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LovelySuSu/selfLoader/issues"
+  },
+  "homepage": "https://github.com/LovelySuSu/selfLoader#readme"
+}
