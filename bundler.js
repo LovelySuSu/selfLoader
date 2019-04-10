@@ -3,7 +3,7 @@ const fs = require('fs')
 const path = require('path')
 const parser = require('@babel/parser')
 const traverse = require('@babel/traverse').default
-
+const babel = require('@babel/core')
 
 const moduleAnalyser = (filename) => {
     const content = fs.readFileSync(filename,'utf-8')
@@ -18,7 +18,14 @@ const moduleAnalyser = (filename) => {
             dependencies[node.source.value] = newFile
         }
     })
-    console.log(dependencies)
+    const { code }  = babel.transformFromAst(ast,null,{
+        presets: ['@babel/preset-env']
+    })
+    console.log(code)
+    return {
+        filename,
+        dependencies
+    }
 }
 
 moduleAnalyser('./src/index.js')
