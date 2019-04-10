@@ -21,11 +21,12 @@ const moduleAnalyser = (filename) => {
     const { code }  = babel.transformFromAst(ast,null,{
         presets: ['@babel/preset-env']
     })
-    console.log(code)
     return {
         filename,
-        dependencies
+        dependencies,
+        code
     }
 }
 
-moduleAnalyser('./src/index.js')
+const moduleInfo = moduleAnalyser('./src/index.js')
+console.log(moduleInfo)
