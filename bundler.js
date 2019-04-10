@@ -1,6 +1,7 @@
 // 没有webpack,用bundler.js做打包
 const fs = require('fs')
 const parser = require('@babel/parser')
+const traverse = require('@babel/traverse').default
 
 
 const moduleAnalyser = (filename) => {
@@ -8,7 +9,11 @@ const moduleAnalyser = (filename) => {
     const ast = parser.parse(content,{
         sourceType: 'module'
     })
-    console.log(ast.program.body)
+    traverse(ast,{
+        ImportDeclaration({node}) {
+            console.log(node)
+        }
+    })
 }
 
 moduleAnalyser('./src/index.js')
