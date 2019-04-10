@@ -9,11 +9,13 @@ const moduleAnalyser = (filename) => {
     const ast = parser.parse(content,{
         sourceType: 'module'
     })
+    const dependence = []
     traverse(ast,{
-        ImportDeclaration({node}) {
-            console.log(node)
+        ImportDeclaration({ node }) {
+            dependence.push(node.source.value)
         }
     })
+    console.log(dependence)
 }
 
 moduleAnalyser('./src/index.js')
