@@ -1,5 +1,6 @@
 // 没有webpack,用bundler.js做打包
 const fs = require('fs')
+const path = require('path')
 const parser = require('@babel/parser')
 const traverse = require('@babel/traverse').default
 
@@ -9,13 +10,15 @@ const moduleAnalyser = (filename) => {
     const ast = parser.parse(content,{
         sourceType: 'module'
     })
-    const dependence = []
+    const dependencies = {}
     traverse(ast,{
         ImportDeclaration({ node }) {
-            dependence.push(node.source.value)
+            const dirname = path.dirname(filename)
+            const newFile = './' + path.join(dirname,node.source.value) // 相对于bundler.js的路径
+            dependencies[node.source.value] = newFile
         }
     })
-    console.log(dependence)
+    console.log(dependencies)
 }
 
 moduleAnalyser('./src/index.js')
