@@ -49,7 +49,10 @@ const makeDependenciesGraph = (entry) => {
     })
     return graph
 }
+const generatorCode = (entry) => {
+    const graph = makeDependenciesGraph(entry)
+    return `(function(graph){})(${JSON.stringify(graph)})`
+}
 
-
-const graphInfo = makeDependenciesGraph('./src/index.js')
-console.log(graphInfo)
+const code = generatorCode('./src/index.js')
+console.log(code)
