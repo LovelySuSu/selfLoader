@@ -49,20 +49,24 @@ const makeDependenciesGraph = (entry) => {
     })
     return graph
 }
-const generatorCode = (entry) => {
-    const graph = makeDependenciesGraph(entry)
-    return function(graph){
-        function require(module) {
-            function localRequire(relativePath) {
-                return require(graph[module].dependencies.relativePath)
-            }
-            (function(require,code){
-                eval(code)
-            })(localRequire,graph[module].code)
-        }
-    }
-    // (${JSON.stringify(graph)})
+const generateCode = (entry) => {
+    const graph = JSON.stringify(makeDependenciesGraph(entry));
+    return `
+		(function(graph){
+			function require(module) { 
+				function localRequire(relativePath) {
+					return require(graph[module].dependencies[relativePath]);
+				}
+				var exports = {};
+				(function(require, exports, code){
+					eval(code)
+				})(localRequire, exports, graph[module].code)
+				return exports;
+			};
+			require('${entry}')
+		})(${graph})
+	`
 }
 
-const code = generatorCode('./src/index.js')
+const code = generateCode('./src/index.js')
 console.log(code)
