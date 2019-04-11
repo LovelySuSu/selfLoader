@@ -51,7 +51,17 @@ const makeDependenciesGraph = (entry) => {
 }
 const generatorCode = (entry) => {
     const graph = makeDependenciesGraph(entry)
-    return `(function(graph){})(${JSON.stringify(graph)})`
+    return function(graph){
+        function require(module) {
+            function localRequire(relativePath) {
+                return require(graph[module].dependencies.relativePath)
+            }
+            (function(require,code){
+                eval(code)
+            })(localRequire,graph[module].code)
+        }
+    }
+    // (${JSON.stringify(graph)})
 }
 
 const code = generatorCode('./src/index.js')
