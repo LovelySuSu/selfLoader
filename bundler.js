@@ -47,9 +47,9 @@ const makeDependenciesGraph = (entry) => {
             code: item.code
         }
     })
-    console.log(graph)
+    return graph
 }
 
 
 const graphInfo = makeDependenciesGraph('./src/index.js')
-// console.log(graphInfo)
+console.log(graphInfo)
