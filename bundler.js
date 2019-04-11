@@ -27,6 +27,23 @@ const moduleAnalyser = (filename) => {
         code
     }
 }
+// 分析依赖图谱
+const makeDependenciesGraph = (entry) => {
+    const entryModule = moduleAnalyser(entry)
+    const graphArray = [entryModule]
+    for(let i = 0; i< graphArray.length; i++) {
+        const item = graphArray[i]
+        const { dependencies } = item
+        if (dependencies) {
+            for(let key in dependencies) {
+                graphArray.push(moduleAnalyser(dependencies[key]))
+            }
+        }
+    }
+    // console.log(entryModule)
+    console.log(graphArray)
+}
 
-const moduleInfo = moduleAnalyser('./src/index.js')
-console.log(moduleInfo)
+
+const graphInfo = makeDependenciesGraph('./src/index.js')
+// console.log(graphInfo)
