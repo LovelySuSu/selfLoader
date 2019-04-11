@@ -40,8 +40,14 @@ const makeDependenciesGraph = (entry) => {
             }
         }
     }
-    // console.log(entryModule)
-    console.log(graphArray)
+    const graph = {}
+    graphArray.forEach(item => {
+        graph[item.filename] = {
+            dependencies: item.dependencies,
+            code: item.code
+        }
+    })
+    console.log(graph)
 }
 
 
